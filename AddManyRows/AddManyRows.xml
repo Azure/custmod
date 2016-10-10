@@ -1,0 +1,25 @@
+<Module name="Add Many Rows">
+    <Owner>Microsoft Corporation</Owner>
+    <Description>Concatenate many datasets by rows and outputs a single dataset. </Description>    
+	<Language name="R" sourceFile="AddManyRows.R" entryPoint="AddManyRows" />      
+	<Ports>        
+        <Input id="dataset1" name="DS1" type="DataTable">
+            <Description>First input dataset</Description>
+        </Input>
+	<Input id="dataset2" name="DS2" type="DataTable">  
+            <Description>Second input dataset</Description>
+        </Input>
+	<Input id="dataset3" name="DS3" type="DataTable" isOptional="true">
+            <Description>Third input dataset</Description>
+        </Input>
+	<Input id="dataset4" name="DS4" type="DataTable" isOptional="true">		    
+            <Description>Fourth input dataset</Description>
+        </Input>
+	<Input id="dataset5" name="DS5" type="DataTable" isOptional="true">		    
+            <Description>Fifth input dataset</Description>
+        </Input>
+	<Output id="dataset" name="Dataset" type="DataTable">
+            <Description>Combined dataset</Description>
+        </Output>
+    </Ports>
+</Module>
