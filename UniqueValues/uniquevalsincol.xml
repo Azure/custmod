@@ -1,0 +1,19 @@
+<Module name="Get Unique Values">
+	<Owner>Microsoft</Owner>
+	<Description>Extract the unique values from a column, return a DataTable that contains a single column with these unique values</Description>
+	<Language name="R" sourceFile="uniquevalsincol.r" entryPoint="uniquevalsincol" />
+	<Ports>
+		<Input id="dataset1" name="dataset1" type="DataTable" isOptional="false">
+			<Description>Dataset containing values</Description>
+		 </Input>
+		<Output id="output1" name="output1" type="DataTable">
+			<Description>Unique value column</Description>
+		</Output>
+	</Ports>
+	<Arguments>
+		<Arg id="column" name="column" type="ColumnPicker">
+			<Properties default="" allowedTypes="" portId="dataset1" />
+			<Description>Column to choose unique values from</Description>
+		 </Arg>
+	</Arguments>
+</Module>
