@@ -1,0 +1,29 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+
+<Module name="Fit Hierarchical Clusters">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Fit Hierarchical Clusters</Description>
+  <Language name="R" sourceFile="Clusterers.R" entryPoint="trainHierarchicalClusterer" />  
+  <Ports>
+    <Input id="dataset" name="Dataset" type="DataTable">
+      <Description>Input dataset</Description>
+    </Input>
+    <Output id="oDataset" name="Clustered dataset" type="DataTable">
+      <Description>Clustered dataset</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="clusteringMethod" name="Clustering method" type="DropDown">
+      <Properties default="complete">
+         <Item id="complete" name="Complete"/>
+         <Item id="single" name="Single"/>
+         <Item id="average" name="UPGMA average"/>
+      </Properties>
+      <Description>Hierarchical clustering method</Description>
+    </Arg>  
+    <Arg id="nClusters" name="Number of clusters" type="int">
+      <Properties min="1" default="5" />
+      <Description>Number of clusters to cut the tree into</Description>
+    </Arg>  
+  </Arguments>
+</Module>
