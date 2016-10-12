@@ -1,0 +1,28 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+<Module name="Order By Columns">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Orders the data table by the selected columns.</Description>
+	<Language name="R" sourceFile="OrderByColumns.R" entryPoint="OrderByColumns" />
+
+	<!-- Module input and output ports -->
+	<Ports>
+		<Input id="dataset1" name="Input Dataset" type="DataTable">
+			<Description>Dataset to be ordered</Description>
+		</Input>
+		<Output id="dataset" name="Sorted Dataset" type="DataTable">
+			<Description>Sorted dataset</Description>
+		</Output>
+  </Ports>
+
+	<!-- Module arguments -->
+  <Arguments>
+	<Arg id="cols" name="Column to order by" type="ColumnPicker">
+      <Properties portId="dataset1" allowedTypes="All"/>
+      <Description>The dataset is sorted by the selected column, starting with the first and using subsequent colums for tie-breakers. </Description>
+    </Arg>
+    <Arg id="desc" name="Descending order" type="bool">
+      <Properties default="true" />
+      <Description>Boolean Parameter, define whether the ordering must be descending (TRUE), or ascending (FALSE).</Description>
+    </Arg>
+  </Arguments>
+</Module>
