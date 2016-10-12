@@ -1,0 +1,65 @@
+<!-- Defined a module using an R Script -->
+<Module name="Generate Common Distributions">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Generate data based on various common distribution for Monte Carlo Simulations
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="generateData.R" 
+     entryPoint="createdistribution" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+           
+        
+        <Output id="dataset" name="Output Dataset" type="DataTable">
+            <Description>Dataset with selected columns merged</Description>
+        </Output>
+        <Output id="deviceOutput" name="View Port" type="Visualization">
+            <Description>View the R console graphics device output.</Description>
+        </Output>
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="mu" name="Mean" type="double" >
+            <Properties  default="0.0" />
+            <Description>Desired mean of the distribution   </Description>
+        </Arg>
+        <Arg id="sigma" name="standard deviation" type="double" >
+            <Properties  default="1.0" />
+            <Description>Desired standard deviation of the distribution </Description>
+        </Arg>
+         <Arg id="min" name="minimum value" type="double" >
+            <Properties default="0.0" />
+            <Description>minimum desired value within dataset </Description>
+        </Arg>
+         <Arg id="max" name="maximum value" type="double" >
+            <Properties  default="1.0" />
+            <Description>maximum desired value within dataset  </Description>
+        </Arg>
+        <Arg id="norows" name="number of rows" type="int" >
+            <Properties  default="100" />
+            <Description>maximum number of rows in the dataset </Description>
+        </Arg>
+        <Arg id="nocols" name="number of columns" type="int" >
+            <Properties  default="5" />
+            <Description>mum number of columns in the dataset </Description>
+        </Arg>
+         <Arg id="dist" name="type of distribution" type="DropDown" >
+            <Properties default="normal">
+                <Item id="uniform" name="uniform distribution"/>
+                <Item id="normal" name="normal distribution"/>
+                <Item id="logistic" name="logistic distribution "/>
+                <Item id="lognormal" name="log normal distribution"/>
+            </Properties>
+            <Description>distribution for generating data </Description>
+        </Arg>
+        <Arg id="sd" name="seed" type="int" >
+            <Properties  default="3000" isOptional="true" />
+            <Description>seed value for randomness </Description>
+        </Arg>
+    </Arguments>
+</Module>

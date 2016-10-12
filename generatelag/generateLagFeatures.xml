@@ -1,0 +1,34 @@
+<!-- Defined a module using an R Script -->
+<Module name="Generate Lag Features">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Creates additional columns as lag features from previous rows
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="lag.R" 
+     entryPoint="GenerateLagFeatures" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Dataset 1" type="DataTable">
+            <Description>Input dataset</Description>
+        </Input>
+        <Output id="dataset" name="Dataset" type="DataTable">
+            <Description>The combined dataset</Description>
+        </Output>
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="valcol" name="Column set" type="ColumnPicker" >
+            <Properties portId="dataset1" allowedTypes="Numeric" default="NumericAll"/>
+            <Description>Column set for generating lag features.</Description>
+        </Arg>
+        <Arg id="numfeats" name="Number of Features" type="int" >
+            <Properties min="1" max="99" default="3" />
+            <Description>Provide the number of lag features to generate.</Description>
+        </Arg>
+    </Arguments>
+</Module>

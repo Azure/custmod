@@ -1,0 +1,35 @@
+<!-- Defined a module using an R Script -->
+<Module name="Compare Datasets">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Compares datasets and returns boolean matrix for each cell that matches
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="cmp.R" 
+     entryPoint="compareData" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Dataset 1" type="DataTable">
+            <Description>Input first dataset</Description>
+        </Input>
+        <Input id="dataset2" name="Dataset 2" type="DataTable">
+            <Description>Input second dataset</Description>
+        </Input>
+        <Output id="dataset" name="Dataset" type="DataTable">
+            <Description>Boolean Matrix for each cell that matches</Description>
+        </Output>
+        <Output id="sumdataset" name="Summary Dataset" type="DataTable">
+            <Description>dataset compare summary for each column</Description>
+        </Output>
+        <Output id="deviceOutput" name="View Port" type="Visualization">
+            <Description>View the R console graphics device output.</Description>
+        </Output>
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments/>
+        
+</Module>

@@ -1,0 +1,63 @@
+<!-- Defined a module using an R Script -->
+<Module name="Generate Special Distributions">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Generate data based on various rate driven distribution for Monte Carlo Simulations
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="generateData.R" 
+     entryPoint="createdistribution" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+           
+        
+        <Output id="dataset" name="Output Dataset" type="DataTable">
+            <Description>Dataset with selected columns merged</Description>
+        </Output>
+        <Output id="deviceOutput" name="View Port" type="Visualization">
+            <Description>View the R console graphics device output.</Description>
+        </Output>
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="mu" name="shape or shape 1" type="double" >
+            <Properties  default="0.0" />
+            <Description>Desired shape for weibull or shape 1 for beta   </Description>
+        </Arg>
+        <Arg id="sigma" name="shape 2 or scale" type="double" >
+            <Properties  default="1.0" />
+            <Description>Desired shape2 for beta or scale for weibull </Description>
+        </Arg>
+         <Arg id="min" name="minimum value" type="double" >
+            <Properties default="0.0"  />
+            <Description>minimum desired value within dataset</Description>
+        </Arg>
+         <Arg id="max" name="maximum value" type="double" >
+            <Properties  default="1.0" />
+            <Description>maximum desired value within dataset</Description>
+        </Arg>
+        <Arg id="norows" name="number of rows" type="int" >
+            <Properties  default="100" />
+            <Description>maximum number of rows in the dataset </Description>
+        </Arg>
+        <Arg id="nocols" name="number of columns" type="int" >
+            <Properties  default="5" />
+            <Description>maximum number of columns in the dataset </Description>
+        </Arg>
+         <Arg id="dist" name="type of distribution" type="DropDown" >
+            <Properties default="weibull">
+                <Item id="weibull" name="weibull distribution"/>
+                <Item id="beta" name="beta distribution"/>
+            </Properties>
+            <Description>distribution for generating data </Description>
+        </Arg>
+        <Arg id="sd" name="seed" type="int" >
+            <Properties  default="3000" isOptional="true" />
+            <Description>seed value for randomness </Description>
+        </Arg>
+    </Arguments>
+</Module>

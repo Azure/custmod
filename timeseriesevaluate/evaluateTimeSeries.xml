@@ -1,0 +1,49 @@
+<!-- Defined a module using an R Script -->
+<Module name="Evaluate Timeseries">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Evaluates timeseries data by computing performance metrics
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="evaluateTimeSeries.R" 
+     entryPoint="evaluateTimeSeries" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Training Dataset" type="DataTable">
+            <Description>Input dataset with time, data and forecast columns</Description>
+        </Input>
+        
+        <Output id="dataset" name="MetricsDataset" type="DataTable">
+            <Description>Dataset with forecast performance metrics</Description>
+        </Output>
+        <Output name="View Port" type="Visualization" id="deviceOutput">
+            <Description>View the R console graphics device output.</Description>
+        </Output>
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="obsd" name="Observed Column" type="ColumnPicker" >
+            <Properties portId="dataset1" allowedTypes="Numeric" default="NumericAll"/>
+            <Description>Observed Column used for time series forecasting.</Description>
+        </Arg>
+        <Arg id="fcst" name="Forecast Column" type="ColumnPicker" >
+            <Properties portId="dataset1" allowedTypes="Numeric" default="NumericAll"/>
+            <Description>Predicted Column forecasted by time series forecasting.</Description>
+        </Arg>
+        <Arg id="algo" name="Algorithm" type="DropDown">
+            <Properties default="arima">
+                <Item id="arima" name="Arima"/>
+                <Item id="ets" name="ETS"/>
+                <Item id="stl" name="STL"/>
+                <Item id="stlarima" name="STLArima"/>
+                
+            </Properties>
+            <Description>Select algorithm that was used for forecasts.</Description>
+        </Arg>
+        
+    </Arguments>
+</Module>

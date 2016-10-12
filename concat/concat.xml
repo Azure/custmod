@@ -1,0 +1,37 @@
+<!-- Defined a module using an R Script -->
+<Module name="Concatenate Columns">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Merges multiple columns into a single column
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="concat.R" 
+     entryPoint="concatenate" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Input Dataset" type="DataTable">
+            <Description>Input dataset that has needs its columns to be concatenated</Description>
+        </Input>
+        
+        
+        <Output id="dataset" name="Output Dataset" type="DataTable">
+            <Description>Dataset with selected columns merged</Description>
+        </Output>
+        
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="colrng" name="Select Columns" type="ColumnPicker" >
+            <Properties portId="dataset1" allowedTypes="All" default="All"/>
+            <Description>Column to be merged.</Description>
+        </Arg>
+        <Arg id="sep" name="Delimiter" type="string" >
+            <Properties default=" " isOptional="true" />
+            <Description>Character to be used as delimiter while merging columns. Default is space</Description>
+        </Arg>
+    </Arguments>
+</Module>

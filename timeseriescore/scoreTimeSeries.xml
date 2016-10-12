@@ -1,0 +1,39 @@
+<!-- Defined a module using an R Script -->
+<Module name="Score Timeseries">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Score timeseries based on previously computed model
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="scorewithnumperiods.R" 
+     entryPoint="pts" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Model Dataset" type="DataTable">
+            <Description>Input Training dataset</Description>
+        </Input>
+        
+        <Output id="dataset" name="PredDataset" type="DataTable">
+            <Description>Dataset with future periods and predictions</Description>
+        </Output>
+        <Output id="dataset80" name="p80ConfInterval" type="DataTable">
+            <Description>80% confidence interval</Description>
+        </Output>
+        <Output id="dataset95" name="p95ConfInterval" type="DataTable">
+            <Description>95% confidence interval</Description>
+        </Output>
+        
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+       
+        <Arg id="numPeriodsToForecast" name="Predictions" type="int" >
+            <Properties min="1" max="99" default="12" />
+            <Description>Number of forecast points to be created in future.</Description>
+        </Arg>
+    </Arguments>
+</Module>

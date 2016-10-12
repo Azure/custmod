@@ -1,0 +1,48 @@
+<!-- Defined a module using an R Script -->
+<Module name="Text to Columns">
+    <Owner>Neeraj Khanchandani</Owner>
+    <Description>Creates multiple columns from a single Text column
+    </Description>
+
+<!-- Specify the base language, script file and R function to use for this module. -->      
+    <Language name="R" 
+     sourceFile="TextToColumns.R" 
+     entryPoint="TextToCols" />  
+
+<!-- Define module input and output ports -->
+<!-- Note: The values of the id attributes in the Input and Arg elements must match the parameter names in the R Function CustomAddRows defined in CustomAddRows.R. -->
+    <Ports>
+        <Input id="dataset1" name="Incoming Dataset" type="DataTable">
+            <Description>Input dataset that has a column to be splitted into multiple columns</Description>
+        </Input>
+        <Input id="dataset2" name="Column Names" type="DataTable" isOptional="true">
+            <Description>Input dataset that has column names for the new columns created</Description>
+        </Input>
+        
+        <Output id="dataset" name="Output Dataset" type="DataTable">
+            <Description>Dataset with multiple columns</Description>
+        </Output>
+        
+    </Ports>
+
+<!-- Define module parameters -->
+    <Arguments>
+        <Arg id="selcol" name="Select Column" type="ColumnPicker" >
+            <Properties portId="dataset1" allowedTypes="String" default="StringAll"/>
+            <Description>Column to be used for time series forecasting.</Description>
+        </Arg>
+        <Arg id="splch" name="Split Character" type="string" >
+            <Properties default=" " isOptional="false" />
+            
+            <Description>Character to be used for splitting text into multiple columns. Default is space</Description>
+        </Arg>
+        <Arg id="incorig" name="Include Original Column" type="DropDown">
+            <Properties default="excl">
+                <Item id="excl" name="Exclude"/>
+                <Item id="incl" name="Include"/>
+            </Properties>
+            <Description>Select option whether input dataset should be copied or replaced at output.</Description>
+        </Arg>
+        
+    </Arguments>
+</Module>
