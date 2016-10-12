@@ -1,0 +1,28 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+
+<Module name="Score Clusters by KNN Lookup">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Score Clusters by KNN Lookup</Description>
+  <Language name="R" sourceFile="Clusterers.R" entryPoint="scoreClustererByKNN" />  
+  <Ports>
+    <Input id="clustering" name="Clustered Dataset" type="DataTable">
+      <Description>Clustered dataset from Fit DBSCAN or Hierarchical Clusters module</Description>
+    </Input>
+    <Input id="dataset" name="New Dataset" type="DataTable">
+      <Description>New dataset to be clustered</Description>
+    </Input>
+    <Output id="oDataset" name="Result" type="DataTable">
+      <Description>New dataset with clusters assigned </Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="label" name="Column with cluster assignments" type="ColumnPicker">   
+      <Properties portId="clustering" allowedTypes="All" default="NumericAll"/>
+      <Description>Column with cluster assignments</Description>
+    </Arg>
+    <Arg id="append" name="Append new cluster assignments to data" type="bool">
+        <Properties default="true" />
+        <Description>Append cluster assignments to data instead of returning results only</Description>
+    </Arg>
+  </Arguments>
+</Module>

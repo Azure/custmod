@@ -1,0 +1,27 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+<Module name="Visualize Prediction Errors">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Visualize Prediction Errors</Description>
+  <Language name="R" sourceFile="VisualizeData.R" entryPoint="errorplots" />  
+  <Ports>
+    <Input id="dataset" name="Scored dataset" type="DataTable">
+      <Description>Scored dataset with label and score columns</Description>
+    </Input>
+    <Output id="deviceOutput" name="Visualization" type="Visualization">
+      <Description>Visualization</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="featurecol" name="Feature column" type="ColumnPicker">   
+      <Properties portId="dataset" allowedTypes="All" default="None"/>
+      <Description>Feature column to plot predictions against</Description>
+    </Arg>
+    <Arg id="errorviztype" name="Visualization type" type="DropDown">
+      <Properties default="regressionerror">
+         <Item id="regressionerror" name="Regression error plot"/>
+         <Item id="classificationacc" name="Classification accuracy plot"/>
+      </Properties>
+      <Description>Visualization type</Description>
+    </Arg>  
+  </Arguments>
+</Module>

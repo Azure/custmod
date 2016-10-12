@@ -1,0 +1,21 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+
+<Module name="Fit DBSCAN Clusters">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Fit DBSCAN Clusters</Description>
+  <Language name="R" sourceFile="Clusterers.R" entryPoint="trainDBSCANClusterer" />  
+  <Ports>
+    <Input id="dataset" name="Dataset" type="DataTable">
+      <Description>Input dataset</Description>
+    </Input>
+    <Output id="oDataset" name="Clustered dataset" type="DataTable">
+      <Description>Clustered dataset</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="dbscanEps" name="Epsilon" type="double">
+      <Properties min="0.000000001" default="1.0" />
+      <Description>DBSCAN epsilon distance parameter</Description>
+    </Arg>  
+  </Arguments>
+</Module>

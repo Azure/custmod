@@ -1,0 +1,32 @@
+<!-- (C) 2015 Microsoft Corporation. All rights reserved. -->
+<Module name="Visualize Grouped Data">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Visualize Grouped Data</Description>
+  <Language name="R" sourceFile="VisualizeData.R" entryPoint="keyvalueplots" />  
+  <Ports>
+    <Input id="dataset" name="Dataset" type="DataTable">
+      <Description>Input dataset</Description>
+    </Input>
+    <Output id="deviceOutput" name="Visualization" type="Visualization">
+      <Description>Visualization</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="xcol" name="Group key column" type="ColumnPicker">   
+      <Properties portId="dataset" allowedTypes="All" default="None"/>
+      <Description>Group key column</Description>
+    </Arg>
+    <Arg id="ycol" name="Data column" type="ColumnPicker">   
+      <Properties portId="dataset" allowedTypes="All" default="None"/>
+      <Description>Data column</Description>
+    </Arg>
+    <Arg id="groupviztype" name="Visualization type" type="DropDown">
+      <Properties default="densitywithkey">
+         <Item id="densitywithkey" name="Grouped density plot"/>
+         <Item id="histogramwithkey" name="Grouped histogram"/>
+         <Item id="barwithkey" name="Grouped bar chart"/>
+      </Properties>
+      <Description>Visualization type</Description>
+    </Arg>  
+  </Arguments>
+</Module>

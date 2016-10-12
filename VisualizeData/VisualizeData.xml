@@ -1,0 +1,33 @@
+<!-- (C) 2015 Microsoft Corporation. All rights reserved. -->
+
+<Module name="Create Scatterplot">
+  <Owner>Microsoft Corporation</Owner>
+  <Description>Create Scatterplot</Description>
+  <Language name="R" sourceFile="VisualizeData.R" entryPoint="twovariableplots" />  
+  <Ports>
+    <Input id="dataset" name="Dataset" type="DataTable">
+      <Description>Input dataset</Description>
+    </Input>
+    <Output id="deviceOutput" name="Scatterplot" type="Visualization">
+      <Description>Scatterplot</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="xcol" name="X column" type="ColumnPicker">   
+      <Properties portId="dataset" allowedTypes="Numeric" default="None"/>
+      <Description>X column</Description>
+    </Arg>
+    <Arg id="ycol" name="Y column" type="ColumnPicker">   
+      <Properties portId="dataset" allowedTypes="Numeric" default="None"/>
+      <Description>Y column</Description>
+    </Arg>
+    <Arg id="viztype" name="Scatterplot interpolation" type="DropDown">
+      <Properties default="scatterplotwithregression">
+         <Item id="scatterplotplain" name="Datapoints only"/>
+         <Item id="scatterplotwithregression" name="Linear regression"/>
+         <Item id="scatterplotwithloess" name="LOESS smoothing"/>
+      </Properties>
+      <Description>Scatterplot interpolation</Description>
+    </Arg>  
+  </Arguments>
+</Module>
