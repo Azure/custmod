@@ -1,0 +1,22 @@
+<Module name="Regex Select Columns">
+	<Owner>Microsoft</Owner>
+	<Description>Select columns by matching regular expression on column names</Description>
+	<Language name="R" sourceFile="regexcols.r" entryPoint="regexcols" />
+	<Ports>
+		<Input id="dataset1" name="dataset1" type="DataTable" isOptional="false">
+			<Description>Dataset to select columns from</Description>
+		 </Input>
+		<Output id="output1" name="selected" type="DataTable">
+			<Description>Columns matching regular expression</Description>
+		</Output>
+		<Output id="output2" name="remainder" type="DataTable">
+			<Description>Remaining columns</Description>
+		</Output>
+	</Ports>
+	<Arguments>
+		<Arg id="pattern" name="Regular expression" type="string">
+			<Properties default="" />
+			<Description>Regular expression to select columns</Description>
+		 </Arg>
+	</Arguments>
+</Module>
