@@ -1,0 +1,61 @@
+<!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
+
+<Module name="Association Rules">
+  <Owner>Hai Ning</Owner>
+  <Description>Discover relations between variables in dataset</Description>
+  <Language name="R" sourceFile="ar.R" entryPoint="ar" />
+  <Ports>
+    <Input id="dataframe" name="Dataset" type="DataTable">
+      <Description>Input dataset</Description>
+    </Input>
+    <Output id="rulesDataset" name="Rules" type="DataTable">
+      <Description>Learned rules</Description>
+    </Output>
+  </Ports>
+  <Arguments>
+    <Arg id="dataObjType" name="Input Dataset Type" type="DropDown">
+      <Properties default="dataframe">
+        <Item id="dataframe" name="Data Frame"/>
+        <Item id="list" name="Items List"/>
+        <Item id="matrix" name="Items Matrix"/>
+      </Properties>
+      <Description>Input dataset type</Description>
+    </Arg>
+    <Arg id="cols" name="Columns" type="ColumnPicker">
+      <Properties portId="dataframe" allowedTypes="All" default="CategoricalAll"/>
+      <Description>Columns containing items</Description>
+    </Arg>
+    <Arg id="minSupport" name="Minimal Support" type="double">
+      <Properties min="0.000" max="1.00" default="0.1"/>
+      <Description>Minimal support value</Description>
+    </Arg>
+    <Arg id="minConfidence" name="Minimal Confidence" type="double">
+      <Properties min="0.000" max="1.00" default="0.5"/>
+      <Description>Minimal confidence value</Description>
+    </Arg>
+    <Arg id="maxlen" name="Maximum Number of Items in a Rule" type="int">
+      <Properties min="2" default="5"/>
+      <Description>Minimal confidence value</Description>
+    </Arg>
+    <Arg id="sortBy" name="Sort By" type="DropDown">
+      <Properties default="confidence">
+        <Item id="support" name="Support"/>
+        <Item id="confidence" name="Confidence"/>
+        <Item id="lift" name="Lift"/>
+      </Properties>
+      <Description>Sort rules by</Description>
+    </Arg>
+    <Arg id="lhs" name="Left Hand Side" type="string">
+      <Properties isOptional="true"/>
+      <Description>Left hand side item(s)</Description>
+    </Arg>
+    <Arg id="rhs" name="Right Hand Side" type="string">
+      <Properties isOptional="true"/>
+      <Description>Right hand side item(s)</Description>
+    </Arg>
+    <Arg id="pruneRedundancies" name="Prune Redundancies " type="bool">
+      <Properties default="true"/>
+      <Description>Prune redundant rules</Description>
+    </Arg>
+  </Arguments>
+</Module>
