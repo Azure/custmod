@@ -61,13 +61,13 @@
       <Properties default="true"/>
       <Description>Prune redundant rules</Description>
     </Arg>
-    <Arg id="target" name="Return type" type="Dropdown">
+    <Arg id="target" name="Return type" type="DropDown">
       <Properties default="rules">
-	<item id="frequent itemsets" name="Frequent Itemsets"/>
-	<item id="maximally frequent itemsets" name="Maximally Frequent Itemsets"/>
-	<item id="closed frequent itemsets" name="Closed Frequent Itemsets"/>
-	<item id="rules" name="Rules"/>
-	<item id="hyperedgesets" name="Hyper Edge Sets"/>
+        <Item id="frequent" name="Frequent Itemsets"/>
+        <Item id="maximally" name="Maximally Frequent Itemsets"/>
+        <Item id="closed" name="Closed Frequent Itemsets"/>
+        <Item id="rules" name="Rules"/>
+        <Item id="hyperedgesets" name="Hyper Edge Sets"/>
       </Properties>
       <Description>Output type</Description>
     </Arg>
