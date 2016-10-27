@@ -6,11 +6,14 @@ ar <- function(dataframe,
                cols = NULL, 
                minSupport = 0.1, 
                minConfidence = 0.8,                               
+               minlen = 2,
                maxlen = 5, 
                sortBy = "confidence", 
                lhs = NULL, 
                rhs = NULL, 
-               pruneRedundancies = FALSE) {  
+               pruneRedundancies = FALSE,
+               target = "rules",
+               maxReturnItems = 100) {  
   # initialization
   trx = NULL
   class(minSupport) <- NULL
@@ -44,7 +47,7 @@ ar <- function(dataframe,
   }
   
   # parameter list. set minlen = 2 to avoid empty rule sets
-  p <- list(supp = minSupport, confidence = minConfidence, minlen = 2, maxlen = maxlen)   
+  p <- list(supp = minSupport, confidence = minConfidence, minlen = minlen, maxlen = maxlen, target = target)   
   # appearance list
   a <- list()
   if (!is.null(rhs)){ 
@@ -58,31 +61,55 @@ ar <- function(dataframe,
   if (!is.null(lhs) & !is.null(rhs)) { a$default <- "none" }
   
   rules <- apriori(trx, parameter = p, appearance = a)  
+  maxReturnItems <- if (length(rules) < maxReturnItems) length(rules) else maxReturnItems
   
   str(rules)   
-  # prune the rules if asked  
-  if (length(rules) > 0 & pruneRedundancies){
-    sub <- is.subset(rules, rules)
-    sub[lower.tri(sub, diag = T)] <- NA
-    redundant <- colSums(sub, na.rm = T) >= 1
-    rules <- rules[!redundant]
-  }
-  
-  # sort the rules
-  rules <- sort(rules, by = sortBy)
-  
   # find left and right side labels
-  left = character()
-  right = character()
   
-  if(length(rules) > 0) {
-    left = labels(lhs(rules))$elements
-    right = labels(rhs(rules))$elements
+  # create empty charater arrays for left and right hand sides
+  if (target == "rules") {
+    left = character()
+    right = character()
+    
+    # prune the rules if asked  
+    if (length(rules) > 0) {
+      if (length(rules) > 1 & pruneRedundancies) {
+        sub <- is.subset(rules, rules)
+        sub[lower.tri(sub, diag = T)] <- NA
+        redundant <- colSums(sub, na.rm = T) >= 1
+        rules <- rules[!redundant]
+      }
+      # sort the rules
+      rules <- sort(rules, by = sortBy)
+      rules <- rules[1:maxReturnItems]
+      
+      left = labels(lhs(rules))$elements
+      right = labels(rhs(rules))$elements
+    }
+    # print the rules
+    inspect(rules)   
+    # create an array as row index
+    ids <- if (length(rules) > 0) 1:length(rules) else integer()
+    # assemble the rules dataset
+    rulesDataset <- data.frame(id = ids, lhs = left, rhs = right, rules@quality) 
+    return (rulesDataset)  
+  } 
+  # return frequent item sets
+  else { 
+    # always sort by support
+    if (length(rules) > 1) {
+      rules <- sort(rules, by = "support")
+      rules <- rules[1:maxReturnItems]
+    }
+    inspect(rules) 
+    # set up an array for row index
+    ids <- if (length(rules) > 0) 1:length(rules) else integer()
+    # set up an array for items
+    labels <- if (length(rules) == 0) character() else labels(items(rules))$elements
+    # assemble the dataframe
+    itemsDataset <- data.frame(id = ids, items = labels, rules@quality)
+    return (itemsDataset)
   }
-  # print the rules
-  inspect(rules)   
-  ids <- if (length(rules) > 0) c(1:length(rules)) else NULL
-  rulesDataset <- data.frame(id = ids, lhs = left, rhs = right, rules@quality) 
-  return (rulesDataset)
 }
+
 mySplit <- function(s) strsplit(s, ",")[[1]]
