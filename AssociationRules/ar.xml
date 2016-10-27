@@ -67,7 +67,7 @@
         <Item id="maximally" name="Maximally Frequent Itemsets"/>
         <Item id="closed" name="Closed Frequent Itemsets"/>
         <Item id="rules" name="Rules"/>
-        <Item id="hyperedgesets" name="Hyper Edge Sets"/>
+        <Item id="hyperedgesets" name="Hyperedgesets"/>
       </Properties>
       <Description>Output type</Description>
     </Arg>
