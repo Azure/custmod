@@ -1,6 +1,6 @@
 <!-- (C) 2016 Microsoft Corporation. All rights reserved. -->
 
-<Module name="Association Rules">
+<Module name="Discover Association Rules">
   <Owner>Hai Ning</Owner>
   <Description>Discover relations between variables in dataset</Description>
   <Language name="R" sourceFile="ar.R" entryPoint="ar" />
@@ -33,9 +33,13 @@
       <Properties min="0.000" max="1.00" default="0.5"/>
       <Description>Minimal confidence value</Description>
     </Arg>
-    <Arg id="maxlen" name="Maximum Number of Items in a Rule" type="int">
-      <Properties min="2" default="5"/>
-      <Description>Minimal confidence value</Description>
+    <Arg id="minlen" name="Minimal Number of Items in a Rule" type="int">
+      <Properties min="1" default="2"/>
+      <Description>Minimal number of items in a rule discovered</Description>
+    </Arg>
+    <Arg id="maxlen" name="Maximal Number of Items in a Rule" type="int">
+      <Properties min="1" default="5"/>
+      <Description>Maximal number of items in a rule discovered</Description>
     </Arg>
     <Arg id="sortBy" name="Sort By" type="DropDown">
       <Properties default="confidence">
@@ -53,9 +57,23 @@
       <Properties isOptional="true"/>
       <Description>Right hand side item(s)</Description>
     </Arg>
-    <Arg id="pruneRedundancies" name="Prune Redundancies " type="bool">
+    <Arg id="pruneRedundancies" name="Prune Redundancies" type="bool">
       <Properties default="true"/>
       <Description>Prune redundant rules</Description>
+    </Arg>
+    <Arg id="target" name="Return type" type="Dropdown">
+      <Properties default="rules">
+	<item id="frequent itemsets" name="Frequent Itemsets"/>
+	<item id="maximally frequent itemsets" name="Maximally Frequent Itemsets"/>
+	<item id="closed frequent itemsets" name="Closed Frequent Itemsets"/>
+	<item id="rules" name="Rules"/>
+	<item id="hyperedgesets" name="Hyper Edge Sets"/>
+      </Properties>
+      <Description>Output type</Description>
+    </Arg>
+    <Arg id="maxReturnItems" name="Maximal Items Returned" type="int">
+      <Properties default="100" min="1"/>
+      <Description>Maximal number of returned items</Description>
     </Arg>
   </Arguments>
 </Module>
