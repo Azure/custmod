@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- validatedata.xml - (C) 2016 Microsoft Corporation. All rights reserved. -->
+<Module name="Recommend Modules for My Data">	
+<Owner>Microsoft Corporation</Owner>
+  <Description>Recommend modules given the properties of dataset</Description>
+  <Language name="R" sourceFile="recommendmodules.R" entryPoint="recommendmodules"/>  
+    <Ports>
+      <Output id="data_out" name="Module recommendations" type="DataTable">
+        <Description>Module recommendations</Description>
+      </Output>
+      <Input id="data" name="Dataset" type="DataTable">
+	    <Description>Input dataset</Description>
+      </Input>
+    </Ports>
+</Module>
